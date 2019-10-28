@@ -1,6 +1,6 @@
 import React from 'react'
-//import * as request from 'superagent'
-//import {url} from '../constants'
+import * as request from 'superagent'
+import {url} from '../contants'
 
 export default class Signup extends React.Component{
   state = {
@@ -29,19 +29,19 @@ export default class Signup extends React.Component{
 
   onSubmit = (event) => {
     event.preventDefault()
-    // request.post(`${url}/users`)
-    // .send({
-    //   username: this.state.username,
-    //   email: this.state.email,
-    //   password: this.state.password
-    // })
-    // .catch(console.error)
-    // this.setState({
-    //   username: "",
-    //   email: "",
-    //   password: ""
-    // })
-    console.log('onSubmit Signup')
+    request.post(`${url}/user`)
+    .send({
+      userName: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    })
+    .catch(console.error)
+    this.setState({
+      username: "",
+      email: "",
+      password: ""
+    })
+    this.props.history.push('/login')
   }
 
   render(){

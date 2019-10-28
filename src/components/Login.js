@@ -1,20 +1,14 @@
 import React from 'react'
-//import * as request from 'superagent'
-//import { url } from '../constants'
+import * as request from 'superagent'
+import { url } from '../contants'
 import { login } from '../actions/auth'
 import { connect } from 'react-redux'
+//import Validation from './Validation'
 
 class Login extends React.Component {
   state = {
-    username: "",
     email: "",
     password: ""
-  }
-
-  onChangeUsername = (event) => {
-    this.setState({
-      username: event.target.value
-    })
   }
 
   onChangeEmail = (event) => {
@@ -31,20 +25,23 @@ class Login extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault()
-    // request.post(`${url}/login`)
-    //   .send({
-    //     username: this.state.username,
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   })
-    //   .then(result => this.props.login(result.body.jwt))
-    //   .catch(console.error)
-    // this.setState({
-    //   username: "",
-    //   email: "",
-    //   password: ""
-    // })
-    console.log('onSubmit')
+    request.post(`${url}/login`)
+      .send({
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(result => this.props.login(result.body.jwt))
+     // .then(this.props.jwt ? this.props.history.push('/rooms') : console.log('not valid')
+     // )
+      .catch(console.error)
+    this.setState({
+      email: "",
+      password: ""
+    })
+    //if(this.props.jwt) return this.props.history.push('/rooms')
+    this.props.history.push('/rooms')
+   // console.log('jwt on submit', this.props.jwt)
+    
   }
 
   render() {
@@ -53,13 +50,6 @@ class Login extends React.Component {
       <div>
         Login form
         <form onSubmit={this.onSubmit}>
-          <input
-            name='username'
-            type='text'
-            onChange={this.onChangeUsername}
-            value={this.state.username}
-            placeholder='username'
-          ></input>
           <input
             name='email'
             type='text'
