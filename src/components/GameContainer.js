@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Game from './Game'
 import { connect } from 'react-redux'
-import { updateCurrentDice } from '../actions/game'
+import { updateCurrentDice, totalScore } from '../actions/game'
 import { updateCurrentPlayer } from '../actions/game'
 
 class GameContainer extends Component {
@@ -11,17 +11,17 @@ class GameContainer extends Component {
     roundScore: 0,
     // player1_id: 1,
     // player2_id: 2,
-
     // currenthand_player1: 0
   }
-
 
   rollDice = () => {
     let dice1 = Math.floor(Math.random() * 6) + 1
     // console.log("DICE 1", dice1)
     let dice2 = Math.floor(Math.random() * 6) + 1
     //console.log("DICE 2", dice2)
+
     let score = dice1 + dice2
+
     if (dice1 !== 1 && dice2 !== 1) {
       this.setState({
         dice1: dice1,
@@ -35,12 +35,15 @@ class GameContainer extends Component {
         dice2: dice2,
         roundScore: 0,
       })
-
-      this.props.updateCurrentDice(0, 0, 0)
       this.props.updateCurrentPlayer(this.props.currentPlayer === this.props.player1_id ?
         this.props.player2_id : this.props.player1_id)
-    }
+      this.props.updateCurrentDice(dice1, dice2, 0)
 
+    }
+  }
+
+  holdScore = () => {
+    this.props.totalScore(this.props.currentScore)
   }
 
   render() {
@@ -50,6 +53,9 @@ class GameContainer extends Component {
         rollDice={this.rollDice}
         value={this.state}
         currentPlayer={this.props.currentPlayer}
+        holdScore={this.holdScore}
+        score={this.props.score}
+        currentScore={this.props.currentScore}
       />
     </div>)
   }
@@ -58,7 +64,10 @@ class GameContainer extends Component {
 const mapStateToProps = state => ({
   currentPlayer: state.currentPlayer.currentPlayer,
   player1_id: state.currentPlayer.player1_id,
-  player2_id: state.currentPlayer.player2_id
+  player2_id: state.currentPlayer.player2_id,
+  currentScore: state.dice.roundScore,
+  score: state.dice.totalScore
 })
 
-export default connect(mapStateToProps, { updateCurrentDice, updateCurrentPlayer })(GameContainer);
+export default connect(mapStateToProps, { updateCurrentDice, updateCurrentPlayer, totalScore })(GameContainer);
+

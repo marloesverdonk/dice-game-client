@@ -9,6 +9,7 @@ const reducer = (state = initialstate, action = {}) => {
     case 'UPDATE_CURRENT_PLAYER':
       return {...state,
       currentPlayer: action.payload}
+
     default:
       return state;
   }
