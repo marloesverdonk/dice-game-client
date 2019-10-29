@@ -1,18 +1,20 @@
 import request from 'superagent'
 import { url } from '../contants'
 
-export const updateCurrentDice = (dice1, dice2) => (dispatch) => {
-  console.log(dice1, dice2)
+export const updateCurrentDice = (dice1, dice2, score) => (dispatch) => {
+  console.log("updateCurrentDice", dice1, dice2, score)
   request
     .patch(`${url}/room/2`)
     .send({ current_dice1: dice1, current_dice2: dice2 })
     .then(response => {
       console.log("From action", response.body);
-      dispatch(diceUpdate())
+      dispatch(diceUpdate(score))
     })
 }
 
 export const UPDATE_CURRENT_DICE = 'UPDATE_CURRENT_DICE'
-export const diceUpdate = () => ({
-  type: 'UPDATE_CURRENT_DICE'
+export const diceUpdate = (score) => ({
+  type: 'UPDATE_CURRENT_DICE',
+  payload: score
+
 })

@@ -16,14 +16,23 @@ class GameContainer extends Component {
     console.log("DICE 1", dice1)
     let dice2 = Math.floor(Math.random() * 6) + 1
     console.log("DICE 2", dice2)
+    let score = dice1 + dice2
     if (dice1 !== 1 && dice2 !== 1) {
       this.setState({
         dice1: dice1,
         dice2: dice2,
         roundScore: dice1 + dice2
       })
+      this.props.updateCurrentDice(dice1, dice2, score)
+    } else {
+      this.setState({
+        dice1: dice1,
+        dice2: dice2,
+        roundScore: 0
+      })
+      this.props.updateCurrentDice(0, 0, 0)
     }
-    this.props.updateCurrentDice(dice1, dice2)
+
   }
 
   render() {
