@@ -18,3 +18,14 @@ export const diceUpdate = (score) => ({
   payload: score
 
 })
+
+
+export const totalScore = (total) => (dispatch) => {
+  dispatch(scoreTotal(total))
+}
+
+export const TOTAL_SCORE = 'TOTAL_SCORE'
+export const scoreTotal = (score) => ({
+  type: 'TOTAL_SCORE',
+  payload: score
+})

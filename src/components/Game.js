@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Game extends Component {
   render() {
     const value = this.props.value
+    // console.log('GAME', value)
     return (
       <div>
         <h1>Play game</h1>
@@ -11,9 +12,11 @@ class Game extends Component {
         <h1>Dice2</h1>
         <h1>{value.dice2}</h1>
         <h1>Round Score</h1>
-        <h1>{value.roundScore}</h1>
+        <h1>{this.props.roundScore}</h1>
+        <h1>Total Score</h1>
+        <h1>{this.props.score}</h1>
         <button onClick={this.props.rollDice}>ROLL DICE</button>
-        <button>HOLD</button>
+        <button onClick={this.props.holdScore}>HOLD</button>
       </div>
     );
   }

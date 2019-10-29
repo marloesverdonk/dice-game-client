@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import auth from './auth'
-import roundScore from './dice'
+import dice from './dice'
 
 export default combineReducers({
   auth,
-  roundScore
+  dice
 })
