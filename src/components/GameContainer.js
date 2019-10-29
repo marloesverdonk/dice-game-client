@@ -36,7 +36,7 @@ class GameContainer extends Component {
   }
 
   holdScore = () => {
-    this.props.totalScore(this.props.roundScore)
+    this.props.totalScore(this.props.currentScore)
   }
 
   render() {
@@ -44,7 +44,7 @@ class GameContainer extends Component {
       rollDice={this.rollDice}
       holdScore={this.holdScore}
       score={this.props.score}
-      roundScore={this.props.roundScore}
+      currentScore={this.props.currentScore}
       value={this.state}
     />
   }
@@ -53,7 +53,7 @@ class GameContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    roundScore: state.dice.roundScore,
+    currentScore: state.dice.roundScore,
     score: state.dice.totalScore
 
   }
