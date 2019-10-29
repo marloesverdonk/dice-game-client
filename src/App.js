@@ -2,11 +2,12 @@ import React from 'react';
 import './App.css';
 
 import Rooms from './components/Rooms'
-import Signup from './components/Signup';
-import Login from './components/Login'
 import GameContainer from './components/GameContainer'
 
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
+import SignupContainer from './components/SignupContainer';
+import LoginContainer from './components/LoginContainer'
+
 
 function App() {
   return (
@@ -14,17 +15,14 @@ function App() {
       <header className="App-header">
       </header>
       <main>
-        <div>
-          <Link to="/"> Sign up </Link>
-          <Link to="/login"> Login</Link>
-          <Link to='/game'>Game</Link>
 
-          <Route path="/" exact component={Signup} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/rooms" exact component={Rooms} />
-          <Route path="/game" exact component={GameContainer} />
-        </div>
-      </main>
+        <div>
+        <Route path="/game" exact component={GameContainer} />
+        <Route path="/" exact component={SignupContainer} />
+        <Route path="/login" exact component={LoginContainer} />
+        <Route path="/rooms" exact component={Rooms} />
+      </div>
+     </main>
     </div>
   );
 }
