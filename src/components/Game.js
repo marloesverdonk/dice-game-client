@@ -14,6 +14,8 @@ class Game extends Component {
         <h1>{value.roundScore}</h1>
         <button onClick={this.props.rollDice}>ROLL DICE</button>
         <button>HOLD</button>
+        <h1>Current Player</h1>
+        <h1>{this.props.currentPlayer}</h1>
       </div>
     );
   }
