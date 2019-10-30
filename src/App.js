@@ -17,7 +17,7 @@ function App() {
       <main>
 
         <div>
-          <Route path="/game" exact component={GameContainer} />
+          <Route path="/rooms/:id" exact component={GameContainer} />
           <Route path="/" exact component={SignupContainer} />
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/rooms" exact component={RoomsContainer} />
