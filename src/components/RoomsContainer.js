@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Rooms from './Rooms'
-import { createRoom, loadRooms, sendAction } from '../actions/game'
-
+import { createRoom, sendAction, roomsFetched } from '../actions/game'
+import {url} from '../contants'
 
 class RoomsContainer extends Component {
   state = {
-    name: ''
+    name: ""
   }
 
+  source = new EventSource(`${url}/room`)
 
   componentDidMount() {
-    this.props.loadRooms()
+    //this.props.loadRooms()
+    this.source.onmessage = event => {
+      console.log('onmessage roomscontainer', event.data)
+      const rooms = JSON.parse(event.data)
+      console.log(rooms)
+      this.props.roomsFetched(rooms)
+    }
   }
 
   onChange = (event) => {
@@ -19,13 +26,13 @@ class RoomsContainer extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-  }
+  } 
 
   onSubmit = (event) => {
     event.preventDefault()
     this.props.createRoom(this.state.name, this.props.userId)
-    // console.log('From onSubmit')
     this.props.loadRooms()
+
   }
 
   updatePlayer = (id) => {
@@ -69,5 +76,5 @@ const mapStateToProps = state => {
   }
 }
 export default connect(
-  mapStateToProps, { createRoom, loadRooms, sendAction }
+  mapStateToProps, { createRoom, roomsFetched, sendAction }
 )(RoomsContainer);

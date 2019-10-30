@@ -2,7 +2,6 @@ import request from 'superagent'
 import { url } from '../contants'
 
 export const sendAction = (action, roomId) => dispatch => {
-
   request.patch(`${url}/room/${roomId}`)
     .send({ action })
     .then(response => {
@@ -29,6 +28,7 @@ export const createRoom = (name, id) => (dispatch, getState) => {
     .catch(console.error)
 }
 
+
 export const ROOM_CREATE_SUCCESS = 'ROOM_CREATE_SUCCESS'
 const roomCreateSuccess = id => ({
   type: 'ROOM_CREATE_SUCCESS',
@@ -47,8 +47,9 @@ export const loadRooms = () => (dispatch) => {
     .catch(console.error)
 }
 
+
 export const ROOMS_FETCHED = 'ROOMS_FETCHED'
-const roomsFetched = rooms => ({
+export const roomsFetched = rooms => ({
   type: 'ROOMS_FETCHED',
   rooms
 })
