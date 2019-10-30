@@ -13,7 +13,7 @@ class Rooms extends React.Component {
 
   render() {
     const rooms = this.props.room
-    // console.log("Rooms", rooms)
+
     return (
       <div>
         <button onClick={this.onClick}>New player</button>
@@ -26,14 +26,15 @@ class Rooms extends React.Component {
             onChange={this.props.onChange}
           ></input>
           <button type='submit'>Save</button>
-          <h1>Rooms List</h1>
-          {rooms === null ? <p>Loading...</p>
-            : <ul>{rooms.map(room => <li key={room.id}>
-              {room.room_name}{room.room_status}
-              <button onClick={this.props.onClick}>Join</button>
-            </li>)}</ul>
-          }
         </form>
+        <h1>Rooms List</h1>
+        {rooms === null ? <p>Loading...</p>
+          : <ul>{rooms.map(room => <li key={room.id}>
+            {room.room_name}{room.room_status}
+            <button onClick={this.props.onClick}>Join</button>
+          </li>)}</ul>
+        }
+
       </div>
     )
   }

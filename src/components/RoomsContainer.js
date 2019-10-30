@@ -25,17 +25,17 @@ class RoomsContainer extends Component {
     event.preventDefault()
     this.props.createRoom(this.state.name, this.props.userId)
     console.log('From onSubmit')
-    this.setState({
-      name: ''
-    })
+    this.props.loadRooms()
   }
 
   updatePlayer = () => {
+    console.log("this one?")
     this.props.sendAction('updatePlayer')
   }
 
 
   render() {
+    console.log("loggedin?", this.props.userId)
     return <Rooms
       onChange={this.onChange}
       onSubmit={this.onSubmit}

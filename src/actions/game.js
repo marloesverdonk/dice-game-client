@@ -2,7 +2,7 @@ import request from 'superagent'
 import { url } from '../contants'
 
 export const sendAction = action => dispatch => {
-  const roomId = 10
+  const roomId = 22
   request.patch(`${url}/room/${roomId}`)
     .send({ action })
     .then(response => {
