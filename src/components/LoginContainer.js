@@ -31,7 +31,7 @@ class LoginFormContainer extends React.Component {
   }
 
   render() {
-    console.log("loginc", this.props.token)
+    // console.log("loginc", this.props.token)
     return this.props.token.token ? (
       // If we have a token, redirect to Rooms
       <Redirect to="/rooms" />

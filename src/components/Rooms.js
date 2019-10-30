@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { login } from "../actions/auth";
 
 
-
 class Rooms extends React.Component {
   onClick = () => {
     this.props.login("");
     this.props.history.push('/')
   }
+
+
+
 
 
   render() {
@@ -25,13 +27,13 @@ class Rooms extends React.Component {
             placeholder='Room name'
             onChange={this.props.onChange}
           ></input>
-          <button type='submit'>Save</button>
+          <button type='submit' onClick={this.props.toThePage}>Save</button>
         </form>
         <h1>Rooms List</h1>
         {rooms === null ? <p>Loading...</p>
           : <ul>{rooms.map(room => <li key={room.id}>
             {room.room_name}{room.room_status}
-            <button onClick={this.props.onClick}>Join</button>
+            <button onClick={() => this.props.onClick(room.id)}>Join</button>
           </li>)}</ul>
         }
 

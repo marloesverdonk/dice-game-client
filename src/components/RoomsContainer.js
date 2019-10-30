@@ -22,7 +22,7 @@ class RoomsContainer extends Component {
   }
 
   onChange = (event) => {
-    console.log('From onChange')
+    // console.log('From onChange')
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -31,14 +31,26 @@ class RoomsContainer extends Component {
   onSubmit = (event) => {
     event.preventDefault()
     this.props.createRoom(this.state.name, this.props.userId)
-    console.log('From onSubmit')
-   // this.props.loadRooms()
+    this.props.loadRooms()
+
   }
 
-  updatePlayer = () => {
-    console.log("this one?")
-    this.props.sendAction('updatePlayer')
+  updatePlayer = (id) => {
+    console.log("toThePage", id)
+    this.props.sendAction('updatePlayer', id)
+    this.props.history.push(`/rooms/${id}`)
   }
+
+
+  toThePage = () => {
+    if (this.props.room !== null) {
+      this.props.history.push(`/rooms/${this.props.room}`)
+      console.log('READY')
+    } else {
+      console.log('NO DATA')
+    }
+  }
+
 
 
   render() {
@@ -49,6 +61,7 @@ class RoomsContainer extends Component {
       value={this.state}
       room={this.props.rooms}
       onClick={this.updatePlayer}
+      toThePage={this.toThePage}
     />
 
 
@@ -58,7 +71,8 @@ class RoomsContainer extends Component {
 const mapStateToProps = state => {
   return {
     userId: state.auth.id,
-    rooms: state.rooms
+    rooms: state.rooms,
+    room: state.room
   }
 }
 export default connect(

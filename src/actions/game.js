@@ -1,8 +1,7 @@
 import request from 'superagent'
 import { url } from '../contants'
 
-export const sendAction = action => dispatch => {
-  const roomId = 2
+export const sendAction = (action, roomId) => dispatch => {
   request.patch(`${url}/room/${roomId}`)
     .send({ action })
     .then(response => {
@@ -24,21 +23,30 @@ export const createRoom = (name, id) => (dispatch, getState) => {
     .send({ room_name: name, player1_id: id })
     .then(response => {
       console.log(response)
-      //dispatch(roomCreateSuccess(response.body))
+      dispatch(roomCreateSuccess(response.body.id))
     })
     .catch(console.error)
 }
 
-// export const loadRooms = () => (dispatch) => {
-//   // console.log("Id loadevent", id)
-//   request
-//     .get(`${url}/room`)
-//     .then(response => {
-//       // console.log("BODY", response)
-//       dispatch(roomsFetched(response.body))
-//     })
-//     .catch(console.error)
-// }
+
+export const ROOM_CREATE_SUCCESS = 'ROOM_CREATE_SUCCESS'
+const roomCreateSuccess = id => ({
+  type: 'ROOM_CREATE_SUCCESS',
+  id
+})
+
+
+export const loadRooms = () => (dispatch) => {
+  // console.log("Id loadevent", id)
+  request
+    .get(`${url}/room`)
+    .then(response => {
+      // console.log("BODY", response)
+      dispatch(roomsFetched(response.body))
+    })
+    .catch(console.error)
+}
+
 
 export const ROOMS_FETCHED = 'ROOMS_FETCHED'
 export const roomsFetched = rooms => ({
@@ -46,14 +54,23 @@ export const roomsFetched = rooms => ({
   rooms
 })
 
+export const loadRoom = (id) => (dispatch) => {
+  console.log("ROOM", id)
+  request
+    .get(`${url}/room/${id}`)
+    .then(response => {
+      // console.log("LOADROOM", response.body)
+      dispatch(roomFetched(response.body))
+    })
+    .catch(console.error)
+}
 
 
-
-
-
-
-
-
+export const ROOM_FETCHED = 'ROOM_FETCHED'
+export const roomFetched = room => ({
+  type: 'ROOM_FETCHED',
+  room
+})
 
 
 
