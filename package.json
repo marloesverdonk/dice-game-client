@@ -5,6 +5,7 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
+    "json-sse": "0.0.0",
     "jsonwebtoken": "^8.5.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -35,5 +36,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marloesverdonk/dice-game-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marloesverdonk/dice-game-client/issues"
+  },
+  "homepage": "https://github.com/marloesverdonk/dice-game-client#readme"
 }
