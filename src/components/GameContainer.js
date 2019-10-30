@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Game from './Game'
 import { connect } from 'react-redux'
-import { updateCurrentDice, totalScore } from '../actions/game'
-import { updateCurrentPlayer } from '../actions/game'
+import { sendAction } from '../actions/game'
+// import { updateCurrentDice, totalScore, updateCurrentScore } from '../actions/game'
+// import { updateCurrentPlayer } from '../actions/game'
 
 class GameContainer extends Component {
   state = {
@@ -14,41 +15,54 @@ class GameContainer extends Component {
     // currenthand_player1: 0
   }
 
-  rollDice = () => {
-    let dice1 = Math.floor(Math.random() * 6) + 1
-    // console.log("DICE 1", dice1)
-    let dice2 = Math.floor(Math.random() * 6) + 1
-    //console.log("DICE 2", dice2)
+  rollDice = () => this.props.sendAction("roll")
 
-    let score = dice1 + dice2
 
-    if (dice1 !== 1 && dice2 !== 1) {
-      this.setState({
-        dice1: dice1,
-        dice2: dice2,
-        roundScore: dice1 + dice2,
-      })
-      this.props.updateCurrentDice(dice1, dice2, score)
-    } else {
-      this.setState({
-        dice1: dice1,
-        dice2: dice2,
-        roundScore: 0,
-      })
-      this.props.updateCurrentPlayer(this.props.currentPlayer === this.props.player1_id ?
-        this.props.player2_id : this.props.player1_id)
-      this.props.updateCurrentDice(dice1, dice2, 0)
+  // {
+  //   let dice1 = Math.floor(Math.random() * 6) + 1
+  //   // console.log("DICE 1", dice1)
+  //   let dice2 = Math.floor(Math.random() * 6) + 1
+  //   //console.log("DICE 2", dice2)
 
-    }
-  }
+  //   let score = dice1 + dice2
 
-  holdScore = () => {
-    this.props.totalScore(this.props.currentScore)
-  }
+  //   if (dice1 !== 1 && dice2 !== 1) {
+  //     this.setState({
+  //       dice1: dice1,
+  //       dice2: dice2,
+  //       roundScore: dice1 + dice2,
+  //     })
+  //     this.props.updateCurrentDice(dice1, dice2, score)
+  //     if (this.props.currentPlayer === 2) {
+  //       this.props.updateCurrentScore(this.props.currentScore)
+  //     }
+
+  //   } else {
+  //     this.setState({
+  //       dice1: dice1,
+  //       dice2: dice2,
+  //       roundScore: 0,
+  //     })
+  //     this.props.updateCurrentPlayer(this.props.currentPlayer === this.props.player1_id ?
+  //       this.props.player2_id : this.props.player1_id)
+  //     this.props.updateCurrentDice(dice1, dice2, 0)
+
+  //   }
+  // }
+
+  holdScore = () => this.props.sendAction("hold")
+  // {
+  //   // this.props.totalScore(this.props.currentScore, this.props.score)
+  //   if (this.props.currentPlayer === 2) {
+  //     console.log('GAMECONTAINER', this.props.currentScore, this.props.score)
+  //     this.props.totalScore(this.props.currentScore, this.props.score)
+  //   }
+  //   // this.props.totalScore(this.props.currentScore, this.props.score)
+  // }
 
   render() {
     return (<div>
-      {console.log(this.props.currentPlayer)}
+      {/* {console.log(this.props.currentPlayer)} */}
       <Game
         rollDice={this.rollDice}
         value={this.state}
@@ -69,5 +83,5 @@ const mapStateToProps = state => ({
   score: state.dice.totalScore
 })
 
-export default connect(mapStateToProps, { updateCurrentDice, updateCurrentPlayer, totalScore })(GameContainer);
+export default connect(mapStateToProps, { sendAction })(GameContainer);
 
