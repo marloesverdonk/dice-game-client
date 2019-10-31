@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Rooms from './Rooms'
 import { createRoom, sendAction, roomsFetched } from '../actions/game'
-import {url} from '../contants'
+import { url } from '../contants'
+
 
 class RoomsContainer extends Component {
   state = {
@@ -14,24 +15,24 @@ class RoomsContainer extends Component {
   componentDidMount() {
     //this.props.loadRooms()
     this.source.onmessage = event => {
-     // console.log('onmessage roomscontainer', event.data)
+      // console.log('onmessage roomscontainer', event.data)
       const rooms = JSON.parse(event.data)
-   //   console.log(rooms)
+      //   console.log(rooms)
       this.props.roomsFetched(rooms)
     }
   }
 
   onChange = (event) => {
-    // console.log('From onChange')
     this.setState({
       [event.target.name]: event.target.value
     })
-  } 
+  }
 
-  onSubmit = (event) => {
+  onSubmit = async (event) => {
     event.preventDefault()
-    this.props.createRoom(this.state.name, this.props.userId)
-   // this.props.loadRooms()
+    const roomId = await this.props.createRoom(this.state.name, this.props.userId)
+    console.log(roomId)
+    this.props.history.push(`/rooms/${roomId}`)
 
   }
 
@@ -42,27 +43,23 @@ class RoomsContainer extends Component {
   }
 
 
-  toThePage = () => {
-    if (this.props.room !== null) {
-      this.props.history.push(`/rooms/${this.props.room}`)
-      console.log('READY')
-    } else {
-      console.log('NO DATA')
-    }
-  }
-
 
 
   render() {
-    console.log("loggedin?", this.props.userId)
-    return <Rooms
-      onChange={this.onChange}
-      onSubmit={this.onSubmit}
-      value={this.state}
-      room={this.props.rooms}
-      onClick={this.updatePlayer}
-      toThePage={this.toThePage}
-    />
+    return (
+      <div>
+        <Rooms
+          onChange={this.onChange}
+          onSubmit={this.onSubmit}
+          value={this.state}
+          room={this.props.rooms}
+          onClick={this.updatePlayer}
+          toThePage={this.toThePage}
+          roomId={!this.props.room ? 'waiting' : this.props.room}
+        />
+      </div>
+
+    )
 
 
   }
