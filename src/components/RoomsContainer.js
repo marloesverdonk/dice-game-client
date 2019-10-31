@@ -14,9 +14,9 @@ class RoomsContainer extends Component {
   componentDidMount() {
     //this.props.loadRooms()
     this.source.onmessage = event => {
-      console.log('onmessage roomscontainer', event.data)
+     // console.log('onmessage roomscontainer', event.data)
       const rooms = JSON.parse(event.data)
-      console.log(rooms)
+   //   console.log(rooms)
       this.props.roomsFetched(rooms)
     }
   }
@@ -31,7 +31,7 @@ class RoomsContainer extends Component {
   onSubmit = (event) => {
     event.preventDefault()
     this.props.createRoom(this.state.name, this.props.userId)
-    this.props.loadRooms()
+   // this.props.loadRooms()
 
   }
 
