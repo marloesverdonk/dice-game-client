@@ -31,7 +31,7 @@ class RoomsContainer extends Component {
   onSubmit = (event) => {
     event.preventDefault()
     this.props.createRoom(this.state.name, this.props.userId)
-    this.props.loadRooms()
+   // this.props.loadRooms()
 
   }
 
