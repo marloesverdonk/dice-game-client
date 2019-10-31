@@ -36,10 +36,6 @@ class SignupContainer extends React.Component{
     this.props.history.push('/login')
   }
 
-  onClick = () => {
-    this.props.login("")
-  }
-
   render(){
     return( <div>
       <Link to="/login"> Login</Link>
@@ -48,7 +44,6 @@ class SignupContainer extends React.Component{
         onSubmit={this.onSubmit}
         onChange={this.onChange}
         values={this.state}
-        onClick={this.onClick}
       />
       
     </div>)

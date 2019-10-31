@@ -1,6 +1,6 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
-export const login = (payload) => ({
+export const login = (token, id) => ({
   type: LOGIN_SUCCESS,
-  payload
+  payload: { token, id }
 })

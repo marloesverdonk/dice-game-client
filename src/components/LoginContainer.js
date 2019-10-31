@@ -1,6 +1,6 @@
 import React from "react";
 import * as request from 'superagent'
-import {url} from '../contants'
+import { url } from '../contants'
 import Login from "./Login";
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
@@ -8,7 +8,7 @@ import { Redirect } from "react-router-dom";
 
 class LoginFormContainer extends React.Component {
   state = { email: "", password: "" };
-  
+
   onChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -22,7 +22,7 @@ class LoginFormContainer extends React.Component {
         email: this.state.email,
         password: this.state.password
       })
-      .then(result => this.props.login(result.body.jwt))
+      .then(result => this.props.login(result.body.jwt, result.body.userId))
       .catch(console.error)
     this.setState({
       email: "",
@@ -31,7 +31,8 @@ class LoginFormContainer extends React.Component {
   }
 
   render() {
-    return this.props.token ? (
+    // console.log("loginc", this.props.token)
+    return this.props.token.token ? (
       // If we have a token, redirect to Rooms
       <Redirect to="/rooms" />
     ) : (<div>

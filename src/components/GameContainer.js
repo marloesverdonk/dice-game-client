@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Game from './Game'
 import { connect } from 'react-redux'
-import { updateCurrentDice } from '../actions/game'
+import { sendAction, loadRoom } from '../actions/game'
 
 class GameContainer extends Component {
   state = {
@@ -10,28 +10,34 @@ class GameContainer extends Component {
     roundScore: 0
   }
 
+  componentDidMount() {
+    this.props.loadRoom(this.props.match.params.id)
 
-  rollDice = () => {
-    let dice1 = Math.floor(Math.random() * 6) + 1
-    console.log("DICE 1", dice1)
-    let dice2 = Math.floor(Math.random() * 6) + 1
-    console.log("DICE 2", dice2)
-    if (dice1 !== 1 && dice2 !== 1) {
-      this.setState({
-        dice1: dice1,
-        dice2: dice2,
-        roundScore: dice1 + dice2
-      })
-    }
-    this.props.updateCurrentDice(dice1, dice2)
   }
 
+  rollDice = () => this.props.sendAction("roll", this.props.room.id)
+
+  holdScore = () => this.props.sendAction("hold", this.props.room.id)
+
   render() {
-    return <Game
-      rollDice={this.rollDice}
-      value={this.state}
-    />
+    return (<div>
+
+      <Game
+        rollDice={this.rollDice}
+        //value={this.state}
+        //currentPlayer={this.props.currentPlayer}
+        holdScore={this.holdScore}
+        // score={this.props.score}
+        //currentScore={this.props.currentScore}
+        room={this.props.room}
+      />
+    </div>)
   }
 }
 
-export default connect(null, { updateCurrentDice })(GameContainer);
+const mapStateToProps = state => ({
+  room: state.room
+})
+
+export default connect(mapStateToProps, { sendAction, loadRoom })(GameContainer);
+

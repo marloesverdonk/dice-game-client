@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import Rooms from './components/Rooms'
+import RoomsContainer from './components/RoomsContainer'
 import GameContainer from './components/GameContainer'
 
 import { Route } from "react-router-dom";
@@ -17,12 +17,12 @@ function App() {
       <main>
 
         <div>
-        <Route path="/game" exact component={GameContainer} />
-        <Route path="/" exact component={SignupContainer} />
-        <Route path="/login" exact component={LoginContainer} />
-        <Route path="/rooms" exact component={Rooms} />
-      </div>
-     </main>
+          <Route path="/rooms/:id" exact component={GameContainer} />
+          <Route path="/" exact component={SignupContainer} />
+          <Route path="/login" exact component={LoginContainer} />
+          <Route path="/rooms" exact component={RoomsContainer} />
+        </div>
+      </main>
     </div>
   );
 }
