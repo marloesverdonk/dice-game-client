@@ -27,7 +27,7 @@ class Rooms extends React.Component {
             placeholder='Room name'
             onChange={this.props.onChange}
           ></input>
-          <button type='submit' onClick={this.props.toThePage}>Save</button>
+          <button type='submit'>Save</button>
         </form>
         <h1>Rooms List</h1>
         {rooms === null ? <p>Loading...</p>
