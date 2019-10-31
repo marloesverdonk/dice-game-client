@@ -15,19 +15,21 @@ export const sendAction = (action, roomId) => (dispatch, getState) => {
 }
 
 
-export const createRoom = (name, id) => (dispatch, getState) => {
- // console.log('DATA', name, id)
+export const createRoom = (name, id) => async (dispatch, getState) => {
+  // console.log('DATA', name, id)
   const token = getState().auth.token
   //console.log(token)
-  request
+  return await request
     .post(`${url}/room`)
     .set("Authorization", `Bearer ${token}`)
-    .send({ room_name: name 
+    .send({
+      room_name: name
       //player1_id: id 
     })
     .then(response => {
-     // console.log(response)
       dispatch(roomCreateSuccess(response.body.id))
+      console.log("ROOM id : ", response.body.id)
+      return response.body.id
     })
     .catch(console.error)
 }
