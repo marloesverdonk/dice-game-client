@@ -1,8 +1,10 @@
 import request from 'superagent'
 import { url } from '../contants'
 
-export const sendAction = (action, roomId) => dispatch => {
+export const sendAction = (action, roomId) => (dispatch, getState) => {
+  const token = getState().auth.token
   request.patch(`${url}/room/${roomId}`)
+    .set("Authorization", `Bearer ${token}`)
     .send({ action })
     .then(response => {
       console.log("sendRoll:", response.body)
@@ -14,15 +16,17 @@ export const sendAction = (action, roomId) => dispatch => {
 
 
 export const createRoom = (name, id) => (dispatch, getState) => {
-  console.log('DATA', name, id)
+ // console.log('DATA', name, id)
   const token = getState().auth.token
-  console.log(token)
+  //console.log(token)
   request
     .post(`${url}/room`)
     .set("Authorization", `Bearer ${token}`)
-    .send({ room_name: name, player1_id: id })
+    .send({ room_name: name 
+      //player1_id: id 
+    })
     .then(response => {
-      console.log(response)
+     // console.log(response)
       dispatch(roomCreateSuccess(response.body.id))
     })
     .catch(console.error)
