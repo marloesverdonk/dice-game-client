@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Game from './Game'
 import { connect } from 'react-redux'
-import { sendAction, loadRoom } from '../actions/game'
+import { sendAction, loadRoom, roomFetched } from '../actions/game'
+import { url } from '../contants'
 
 class GameContainer extends Component {
   state = {
@@ -10,10 +11,24 @@ class GameContainer extends Component {
     roundScore: 0
   }
 
-  componentDidMount() {
-    this.props.loadRoom(this.props.match.params.id)
+  source = new EventSource(`${url}/room`)
 
+  componentDidMount() {
+    //this.props.loadRooms()
+    this.source.onmessage = event => {
+      // console.log('onmessage roomscontainer', event.data)
+      const rooms = JSON.parse(event.data)
+      //   console.log(rooms)
+      //   this.props.roomsFetched(rooms)
+      const myRoom = rooms.find(room => room.id === parseInt(this.props.match.params.id))
+      this.props.roomFetched(myRoom)
+     // console.log(typeof this.props.match.params.id, this.props.match.params.id)
+    }
   }
+
+  // componentDidMount() {
+  //   this.props.loadRoom(this.props.match.params.id)
+  // }
 
   rollDice = () => this.props.sendAction("roll", this.props.room.id)
 
@@ -39,5 +54,5 @@ const mapStateToProps = state => ({
   room: state.room
 })
 
-export default connect(mapStateToProps, { sendAction, loadRoom })(GameContainer);
+export default connect(mapStateToProps, { sendAction, loadRoom, roomFetched })(GameContainer);
 
