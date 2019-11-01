@@ -3,6 +3,12 @@ import Game from './Game'
 import { connect } from 'react-redux'
 import { sendAction, loadRoom, roomFetched } from '../actions/game'
 import { url } from '../contants'
+import diceImg1 from '../style/dice-1.png'
+import diceImg2 from '../style/dice-2.png'
+import diceImg3 from '../style/dice-3.png'
+import diceImg4 from '../style/dice-4.png'
+import diceImg5 from '../style/dice-5.png'
+import diceImg6 from '../style/dice-6.png'
 
 class GameContainer extends Component {
   state = {
@@ -22,7 +28,7 @@ class GameContainer extends Component {
       //   this.props.roomsFetched(rooms)
       const myRoom = rooms.find(room => room.id === parseInt(this.props.match.params.id))
       this.props.roomFetched(myRoom)
-     // console.log(typeof this.props.match.params.id, this.props.match.params.id)
+      // console.log(typeof this.props.match.params.id, this.props.match.params.id)
     }
   }
 
@@ -34,17 +40,41 @@ class GameContainer extends Component {
 
   holdScore = () => this.props.sendAction("hold", this.props.room.id)
 
+  dice = (number, id) => {
+    console.log('Hello world', number)
+    if (number === 1) {
+      console.log('Dice 1')
+      return <img src={diceImg1} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
+    } else if (number === 2) {
+      console.log('Dice 2')
+      return <img src={diceImg2} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
+    } else if (number === 3) {
+      console.log('Dice 3')
+      return <img src={diceImg3} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
+    } else if (number === 4) {
+      console.log('Dice 4')
+      return <img src={diceImg4} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
+    } else if (number === 5) {
+      console.log('Dice 5')
+      return <img src={diceImg5} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
+    } else if (number === 6) {
+      console.log('Dice 6')
+      return <img src={diceImg6} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
+    } else {
+      return null
+    }
+  }
+
+
   render() {
     return (<div>
 
       <Game
         rollDice={this.rollDice}
-        //value={this.state}
-        //currentPlayer={this.props.currentPlayer}
         holdScore={this.holdScore}
-        // score={this.props.score}
-        //currentScore={this.props.currentScore}
         room={this.props.room}
+        dice={this.dice}
+
       />
     </div>)
   }
