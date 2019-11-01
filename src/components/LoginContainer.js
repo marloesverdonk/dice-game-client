@@ -36,7 +36,6 @@ class LoginFormContainer extends React.Component {
       // If we have a token, redirect to Rooms
       <Redirect to="/rooms" />
     ) : (<div>
-      <h1>Log in</h1>
       <Login
         onSubmit={this.onSubmit}
         onChange={this.onChange}

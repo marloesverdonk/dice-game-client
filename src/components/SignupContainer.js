@@ -1,12 +1,12 @@
 import React from 'react'
 import * as request from 'superagent'
-import {url} from '../contants'
+import { url } from '../contants'
 import SignUp from './Signup'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
 
-class SignupContainer extends React.Component{
+class SignupContainer extends React.Component {
   state = {
     username: "",
     email: "",
@@ -22,12 +22,12 @@ class SignupContainer extends React.Component{
   onSubmit = (event) => {
     event.preventDefault()
     request.post(`${url}/user`)
-    .send({
-      userName: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    })
-    .catch(console.error)
+      .send({
+        userName: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      })
+      .catch(console.error)
     this.setState({
       username: "",
       email: "",
@@ -36,16 +36,15 @@ class SignupContainer extends React.Component{
     this.props.history.push('/login')
   }
 
-  render(){
-    return( <div>
+  render() {
+    return (<div>
       <Link to="/login"> Login</Link>
-      <h2>Signup form</h2>
       <SignUp
         onSubmit={this.onSubmit}
         onChange={this.onChange}
         values={this.state}
       />
-      
+
     </div>)
   }
 }
