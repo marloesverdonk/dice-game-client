@@ -38,7 +38,7 @@ class SignupContainer extends React.Component {
 
   render() {
     return (<div>
-      <Link to="/login"> Login</Link>
+      <Link to="/login">Login</Link>
       <SignUp
         onSubmit={this.onSubmit}
         onChange={this.onChange}

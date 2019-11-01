@@ -1,3 +1,9 @@
+.rooms{
+  flex-direction: column;
+}
+
+
+
 .room-list {
     width: 1000px;
     position: absolute;
@@ -12,6 +18,7 @@
     filter: alpha(opacity=50); /* For IE8 and earlier */
     border-radius: 2%;
   }
+
 
 
 ul {
@@ -47,18 +54,26 @@ li {
   color: white;
 }
 
-.inline {
+.add-room {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 30%;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  width: 20%;
+  position: absolute;
+  margin: 5%;
 }
 
-.inline label {
+
+
+.rooms .inline label {
   margin: 5px 10px 5px 0;
 }
 
-.inline input {
+.rooms .inline input{
+  width: 50%;
   vertical-align: middle;
   margin: 5px 10px 5px 0;
   padding: 10px;
@@ -66,10 +81,53 @@ li {
   border: 1px solid #ddd;
 }
 
-.inline button {
+.rooms .inline button {
   padding: 10px 20px;
   background-color: green;
   border: 1px solid #ddd;
   color: white;
   cursor: pointer;
+}
+
+
+.winner { 
+font-weight: 300; 
+color: green; 
+}
+
+
+.loser { 
+font-weight: 300; 
+color: red; 
+}
+
+
+.new-player {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-color: #e7e7e7;
+  margin-bottom: 2%;
+}
+
+
+.new-player:hover {
+  background: #e7e7e7;
+}
+
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
 }

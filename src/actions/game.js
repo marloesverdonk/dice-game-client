@@ -6,9 +6,9 @@ export const sendAction = (action, roomId) => (dispatch, getState) => {
   request.patch(`${url}/room/${roomId}`)
     .set("Authorization", `Bearer ${token}`)
     .send({ action })
-    .then(response => {
-      console.log("sendRoll:", response.body)
-    })
+    // .then(response => {
+    //   // console.log("sendRoll:", response.body)
+    // })
     .catch(error => {
       console.log("sendRoll Error:", error)
     })
@@ -28,7 +28,7 @@ export const createRoom = (name, id) => async (dispatch, getState) => {
     })
     .then(response => {
       dispatch(roomCreateSuccess(response.body.id))
-      console.log("ROOM id : ", response.body.id)
+      // console.log("ROOM id : ", response.body.id)
       return response.body.id
     })
     .catch(console.error)
@@ -61,7 +61,7 @@ export const roomsFetched = rooms => ({
 })
 
 export const loadRoom = (id) => (dispatch) => {
-  console.log("ROOM", id)
+  // console.log("ROOM", id)
   request
     .get(`${url}/room/${id}`)
     .then(response => {
@@ -77,8 +77,6 @@ export const roomFetched = room => ({
   type: 'ROOM_FETCHED',
   room
 })
-
-
 
 
 

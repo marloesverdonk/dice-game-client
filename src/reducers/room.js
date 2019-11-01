@@ -4,6 +4,8 @@ const reducer = (state = null, action = {}) => {
       return action.room
     case 'ROOM_CREATE_SUCCESS':
       return action.id
+    case 'CLEAR_ROOM':
+      return null
     default:
       return state;
   }

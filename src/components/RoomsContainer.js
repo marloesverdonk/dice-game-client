@@ -31,13 +31,13 @@ class RoomsContainer extends Component {
   onSubmit = async (event) => {
     event.preventDefault()
     const roomId = await this.props.createRoom(this.state.name, this.props.userId)
-    console.log(roomId)
+    // console.log(roomId)
     this.props.history.push(`/rooms/${roomId}`)
 
   }
 
   updatePlayer = (id) => {
-    console.log("toThePage", id)
+    // console.log("toThePage", id)
     this.props.sendAction('updatePlayer', id)
     this.props.history.push(`/rooms/${id}`)
   }

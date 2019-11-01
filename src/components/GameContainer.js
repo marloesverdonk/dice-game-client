@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Game from './Game'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { sendAction, loadRoom, roomFetched } from '../actions/game'
 import { url } from '../contants'
 import diceImg1 from '../style/dice-1.png'
@@ -41,27 +42,59 @@ class GameContainer extends Component {
   holdScore = () => this.props.sendAction("hold", this.props.room.id)
 
   dice = (number, id) => {
-    console.log('Hello world', number)
     if (number === 1) {
-      console.log('Dice 1')
       return <img src={diceImg1} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
     } else if (number === 2) {
-      console.log('Dice 2')
       return <img src={diceImg2} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
     } else if (number === 3) {
-      console.log('Dice 3')
       return <img src={diceImg3} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
     } else if (number === 4) {
-      console.log('Dice 4')
       return <img src={diceImg4} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
     } else if (number === 5) {
-      console.log('Dice 5')
       return <img src={diceImg5} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
     } else if (number === 6) {
-      console.log('Dice 6')
       return <img src={diceImg6} alt={`Dice-${number}`} className="dice" id={`dice-${id}`} />
     } else {
       return null
+    }
+  }
+
+
+  restart = () => {
+    this.props.history.push(`/rooms`)
+    this.props.clearRoom()
+  }
+
+
+  activePlayer = (userId, turnPlayer, winnerPlayer) => {
+    // console.log("ACTIVE", winnerPlayer)
+    if (userId === turnPlayer) {
+      return (
+        <div>
+          <button className="btn-roll" onClick={this.rollDice}><i className="ion-ios-loop" />ROLL DICE</button>
+          <button className="btn-hold" onClick={this.holdScore}><i className="ion-ios-download-outline" />HOLD</button>
+        </div>
+      )
+
+    }
+    // else if (winnerPlayer) {
+    //   return <button className="btn-restart" onClick={this.restart}><i className="ion-ios-refresh" />Restart</button>
+    // } 
+    else if (winnerPlayer) {
+      return null
+    }
+    else {
+      return <h2>Wait for your turn...</h2>
+    }
+  }
+
+
+  checkWinner = (winnerPlayer, userId) => {
+    // console.log("Winner : ", winnerPlayer, "User Id :", userId)
+    if (!winnerPlayer) {
+      return null
+    } else if (winnerPlayer === userId) {
+      return <h1 className="winner">Winner</h1>
     }
   }
 
@@ -73,16 +106,19 @@ class GameContainer extends Component {
         rollDice={this.rollDice}
         holdScore={this.holdScore}
         room={this.props.room}
+        userId={this.props.userId}
         dice={this.dice}
-
+        activePlayer={this.activePlayer}
+        checkWinner={this.checkWinner}
       />
     </div>)
   }
 }
 
 const mapStateToProps = state => ({
-  room: state.room
+  room: state.room,
+  userId: state.auth.id
 })
 
-export default connect(mapStateToProps, { sendAction, loadRoom, roomFetched })(GameContainer);
+export default withRouter(connect(mapStateToProps, { sendAction, loadRoom, roomFetched })(GameContainer));
 

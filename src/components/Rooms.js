@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
 import '../style/room.css'
+import { withRouter } from 'react-router-dom'
 
 
 class Rooms extends React.Component {
@@ -9,18 +10,18 @@ class Rooms extends React.Component {
     this.props.history.push('/')
   }
 
-
-
   render() {
     const rooms = this.props.room
 
     return (
-      <div>
-        <button onClick={this.onClick}>New player</button>
+      <div className="rooms">
+        <button onClick={this.onClick} className="new-player">New player</button>
         <div className="add-room">
-          <h1>Rooms</h1>
           <form onSubmit={this.props.onSubmit} className="inline">
+            <h3>Create room</h3>
+            <label>Room name: </label>
             <input
+              className="room-name"
               name='name'
               type='text'
               placeholder='Room name'
@@ -30,7 +31,7 @@ class Rooms extends React.Component {
           </form>
         </div>
         <div className="room-list">
-          <h1>Rooms List</h1>
+          <h1>Rooms</h1>
           {rooms === null ? <p>Loading...</p>
             : <ul>{rooms.map(room => <li key={room.id}>
               <b>{room.room_name}</b>  &nbsp; &nbsp;  ({room.room_status})
@@ -43,7 +44,7 @@ class Rooms extends React.Component {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   null,
   { login }
-)(Rooms);
+)(Rooms));
