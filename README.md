@@ -1,4 +1,4 @@
-# 🎲 Dice-Game-Server 🎲
+# 🎲 Dice-Game-Client 🎲
 ## [Check out the deployed version here!](https://dice-game-client.herokuapp.com/)
 
 ## What this project is about
