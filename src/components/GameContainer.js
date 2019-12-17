@@ -68,33 +68,37 @@ class GameContainer extends Component {
 
   activePlayer = (userId, turnPlayer, winnerPlayer) => {
     // console.log("ACTIVE", winnerPlayer)
-    if (userId === turnPlayer) {
-      return (
-        <div>
-          <button className="btn-roll" onClick={this.rollDice}><i className="ion-ios-loop" />ROLL DICE</button>
-          <button className="btn-hold" onClick={this.holdScore}><i className="ion-ios-download-outline" />HOLD</button>
-        </div>
-      )
-
-    }
-    // else if (winnerPlayer) {
-    //   return <button className="btn-restart" onClick={this.restart}><i className="ion-ios-refresh" />Restart</button>
     // } 
-    else if (winnerPlayer) {
+    if (winnerPlayer) {
       return null
-    }
-    else {
-      return <h2>Wait for your turn...</h2>
+    } else {
+      if (userId === turnPlayer) {
+        return (
+          <div>
+            <button className="btn-roll" onClick={this.rollDice}><i className="ion-ios-loop" />ROLL DICE</button>
+            <button className="btn-hold" onClick={this.holdScore}><i className="ion-ios-download-outline" />HOLD</button>
+          </div>
+        )
+
+      }
+      // else if (winnerPlayer) {
+      //   return <button className="btn-restart" onClick={this.restart}><i className="ion-ios-refresh" />Restart</button>
+      else {
+        return <h2>Wait for your turn...</h2>
+      }
     }
   }
 
 
+
   checkWinner = (winnerPlayer, userId) => {
     // console.log("Winner : ", winnerPlayer, "User Id :", userId)
-    if (!winnerPlayer) {
+    if (winnerPlayer === null) {
       return null
     } else if (winnerPlayer === userId) {
-      return <h1 className="winner">Winner</h1>
+      return <h1 className="winner">WINNER!</h1>
+    } else {
+      return <h1 className="loser">LOSER!</h1>
     }
   }
 

@@ -20,8 +20,10 @@ class Game extends Component {
             {this.props.dice(value.current_dice1, 1)}
             {this.props.dice(value.current_dice2, 2)}
             {this.props.activePlayer(this.props.userId, value.turn_player, value.winner_player)}
-            {value.winner_player === this.props.userId ? <h1 className="winner">Winner</h1> : null}
 
+            {this.props.checkWinner(value.winner_player, this.props.userId)}
+
+            {/* {value.winner_player === this.props.userId ? <h1 className="winner">WINNER!</h1> : null} */}
 
             <div className="player-1-panel">
               <div className="player-name">Player 1</div>

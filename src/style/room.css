@@ -1,94 +1,108 @@
-.rooms{
-  flex-direction: column;
+.rooms h3 {
+  text-align: center;
 }
 
 
-
 .room-list {
-    width: 1000px;
+    width: 50%;
     position: absolute;
-    margin-top: 30%;
     padding: 20px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 25%;
     background-color: #fff;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
     font-size: 18px;
     opacity: 0.9;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-    border-radius: 2%;
+    
   }
 
 
-
-ul {
-  list-style-type: none;
-
+li.rooms {
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
 }
 
-li {
-  margin: 0;
-  padding: 10px;
-  text-align: left;
-  padding-left: 30%;
+
+
+li.rooms p {
+  flex: 1;
+  padding: 12px 24px;
+  font-size: 150%;
 }
 
-.join-btn {
-  float: right;
-  margin-right: 30%;
-  background-color: white; 
-  color: black; 
-  border: 2px solid #f44336;
-  padding: 1px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
+li.rooms p.room-name {
+  font-weight: bold;
+}
+
+li.rooms p.room-status {
+  max-width: 40%;
+}
+
+
+li.rooms button.join-btn {
+  padding: 1%;
+  flex: 1;
+  border: 1px solid #ccc;
+  margin: 12px;
   cursor: pointer;
+  max-width: 15%;
+  text-transform: uppercase;
+  font-size: 16px; 
+  font-family: 'Ubuntu', sans-serif
 }
 
 
-.join-btn:hover {
-  background-color: #f44336;
-  color: white;
+li.rooms button.join-btn:hover {
+  background-color: #eee;
 }
 
 .add-room {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  width: 30%;
+  width: 500px;
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  position: absolute;
-  margin: 5%;
+  background-color: #f2f2f2;
+  margin-bottom: 2%;
+  text-align: center;
 }
 
+.add-room form {
+  flex: 1;
+  border: 1px solid #ccc;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 1px 1px 5px rgba(0,0,0, 0.2); 
+}
 
-
-.rooms .inline label {
+.add-room label {
   margin: 5px 10px 5px 0;
 }
 
-.rooms .inline input{
-  width: 50%;
-  vertical-align: middle;
-  margin: 5px 10px 5px 0;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+.add-room input {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 7px 10px;
 }
 
-.rooms .inline button {
-  padding: 10px 20px;
-  background-color: green;
-  border: 1px solid #ddd;
-  color: white;
+.add-room input[type=text] {
+  max-width: 300px;
+}
+
+.add-room button {
+  text-transform: uppercase;
+  margin-left: 10px;
+  padding: 1%;
+  flex: 1;
+  border: 1px solid #ccc;
+  margin: 12px;
   cursor: pointer;
+  max-width: 20%;
+  font-size: 16px; 
+  font-family: 'Ubuntu', sans-serif
 }
 
+.add-room button:hover {
+  background-color: #eee;
+}
 
 .winner { 
 font-weight: 300; 
@@ -103,19 +117,20 @@ color: red;
 
 
 .new-player {
-  border: 2px solid black;
-  background-color: white;
+ border: 1px solid #ccc;
   color: black;
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
   border-color: #e7e7e7;
   margin-bottom: 2%;
+  font-family: 'Ubuntu', sans-serif;
+  text-transform: uppercase;
 }
 
 
 .new-player:hover {
-  background: #e7e7e7;
+   background-color: #eee;
 }
 
 

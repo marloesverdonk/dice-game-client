@@ -24,7 +24,6 @@ class Rooms extends React.Component {
               className="room-name"
               name='name'
               type='text'
-              placeholder='Room name'
               onChange={this.props.onChange}
             ></input>
             <button type='submit'>Save</button>
@@ -33,8 +32,9 @@ class Rooms extends React.Component {
         <div className="room-list">
           <h1>Rooms</h1>
           {rooms === null ? <p>Loading...</p>
-            : <ul>{rooms.map(room => <li key={room.id}>
-              <b>{room.room_name}</b>  &nbsp; &nbsp;  ({room.room_status})
+            : <ul>{rooms.map(room => <li key={room.id} className="rooms">
+              <p className="room-name">{room.room_name}</p>
+              <p className="room-status">({room.room_status})</p>
               <button className="join-btn" onClick={() => this.props.onClick(room.id)}>Join</button>
             </li>)}</ul>
           }
